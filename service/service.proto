@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "example.com/MutexV2;MutexV2service";
+
+package MutexV2service;
+
+message Bid {
+  int32 id = 1;
+  int32 timestamp = 2;
+  int32 amount = 3;
+}
+
+message Acknowledgement {
+  int32 timestamp = 1;
+  string message = 2;
+}
+
+message Timestamp {
+  int32 timestamp = 2;
+}
+
+message Outcome {
+  int32 timestamp = 1;
+  string message = 2;
+}
+
+service CommunicationService {
+  rpc RequestBid(Bid) returns (Acknowledgement);
+  rpc RequestState(Timestamp) returns (Outcome);
+}
